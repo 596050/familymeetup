@@ -1,0 +1,15 @@
+{
+  "profiles": [
+    { "name": "Alex & Jamie", "city": "Berkeley", "kids": "2 and 5", "color": "pink" },
+    { "name": "Taylor & Sam", "city": "Oakland", "kids": "3", "color": "orange" },
+    { "name": "Riley", "city": "San Francisco", "kids": "1 and 4", "color": "blue" },
+    { "name": "Morgan", "city": "Alameda", "kids": "2", "color": "green" },
+    { "name": "Jordan & Casey", "city": "San Jose", "kids": "5", "color": "purple" },
+    { "name": "Avery", "city": "Daly City", "kids": "4 and 7", "color": "teal" },
+    { "name": "Parker & Quinn", "city": "Palo Alto", "kids": "1", "color": "red" },
+    { "name": "Drew", "city": "Fremont", "kids": "2", "color": "indigo" },
+    { "name": "Cameron", "city": "Walnut Creek", "kids": "3", "color": "brown" },
+    { "name": "Reese", "city": "San Mateo", "kids": "6", "color": "mint" }
+  ]
+}
+

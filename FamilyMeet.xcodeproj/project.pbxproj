@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000001 /* FamilyMeetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* FamilyMeetApp.swift */; };
+		A10000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* ContentView.swift */; };
+		A10000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000003 /* Assets.xcassets */; };
+		A10000000000000000000004 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000005 /* DesignSystem.swift */; };
+		A10000000000000000000005 /* Inputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000006 /* Inputs.swift */; };
+		A10000000000000000000006 /* Chips.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000007 /* Chips.swift */; };
+		A10000000000000000000007 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000008 /* Toast.swift */; };
+		A10000000000000000000008 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000009 /* Keyboard.swift */; };
+ 		A10000000000000000000009 /* state.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000A /* state.json */; };
+ 		A1000000000000000000000A /* onboarding_partial.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000B /* onboarding_partial.json */; };
+ 		A1000000000000000000000B /* families_10.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000C /* families_10.json */; };
+ 		A1000000000000000000000C /* AppStateLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000D /* AppStateLoader.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000000000000000000001 /* FamilyMeetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMeetApp.swift; sourceTree = "<group>"; };
+		A20000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A20000000000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A20000000000000000000004 /* FamilyMeet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = FamilyMeet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20000000000000000000005 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		A20000000000000000000006 /* Inputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inputs.swift; sourceTree = "<group>"; };
+		A20000000000000000000007 /* Chips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chips.swift; sourceTree = "<group>"; };
+		A20000000000000000000008 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		A20000000000000000000009 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+ 		A2000000000000000000000A /* state.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = state.json; sourceTree = "<group>"; };
+ 		A2000000000000000000000B /* onboarding_partial.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = onboarding_partial.json; sourceTree = "<group>"; };
+ 		A2000000000000000000000C /* families_10.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = families_10.json; sourceTree = "<group>"; };
+			A2000000000000000000000D /* AppStateLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateLoader.swift; sourceTree = "<group>"; };
+        A20UT000000000000000001 /* FamilyMeetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMeetUITests.swift; sourceTree = "<group>"; };
+        A20UT000000000000000002 /* FamilyMeetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = FamilyMeetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30000000000000000000001 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = ( ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+			A40000000000000000000001 = {
+            isa = PBXGroup;
+            children = (
+                A40000000000000000000002 /* FamilyMeet */,
+                A40000000000000000000003 /* Products */,
+                A40000000000000000000007 /* FamilyMeetUITests */,
+            );
+            sourceTree = "<group>";
+        };
+		A40000000000000000000002 /* FamilyMeet */ = {
+            isa = PBXGroup;
+            children = (
+                A40000000000000000000004 /* DesignSystem */,
+                A40000000000000000000006 /* AppState */,
+                A20000000000000000000001 /* FamilyMeetApp.swift */,
+                A20000000000000000000002 /* ContentView.swift */,
+                A20000000000000000000003 /* Assets.xcassets */,
+            );
+            path = FamilyMeet;
+            sourceTree = "<group>";
+        };
+ 		A40000000000000000000006 /* AppState */ = {
+            isa = PBXGroup;
+            children = (
+                A2000000000000000000000D /* AppStateLoader.swift */,
+                A2000000000000000000000A /* state.json */,
+                A2000000000000000000000B /* onboarding_partial.json */,
+                A2000000000000000000000C /* families_10.json */,
+            );
+            path = AppState;
+            sourceTree = "<group>";
+        };
+			A40000000000000000000004 /* DesignSystem */ = {
+            isa = PBXGroup;
+            children = (
+                A20000000000000000000005 /* DesignSystem.swift */,
+                A20000000000000000000006 /* Inputs.swift */,
+                A20000000000000000000007 /* Chips.swift */,
+                A20000000000000000000008 /* Toast.swift */,
+                A40000000000000000000005 /* Utilities */,
+            );
+            path = DesignSystem;
+            sourceTree = "<group>";
+        };
+	 		A40000000000000000000005 /* Utilities */ = {
+            isa = PBXGroup;
+            children = (
+                A20000000000000000000009 /* Keyboard.swift */,
+            );
+            path = Utilities;
+            sourceTree = "<group>";
+        };
+        A40000000000000000000007 /* FamilyMeetUITests */ = {
+            isa = PBXGroup;
+            children = (
+                A20UT000000000000000001 /* FamilyMeetUITests.swift */,
+            );
+            path = FamilyMeetUITests;
+            sourceTree = "<group>";
+        };
+			A40000000000000000000003 /* Products */ = {
+            isa = PBXGroup;
+            children = (
+                A20000000000000000000004 /* FamilyMeet.app */,
+                A20UT000000000000000002 /* FamilyMeetUITests.xctest */,
+            );
+            name = Products;
+            sourceTree = "<group>";
+        };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+			A50000000000000000000001 /* FamilyMeet */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = A70000000000000000000001 /* Build configuration list for PBXNativeTarget "FamilyMeet" */;
+            buildPhases = (
+                A30000000000000000000002 /* Sources */,
+                A30000000000000000000001 /* Frameworks */,
+                A30000000000000000000003 /* Resources */,
+            );
+            buildRules = (
+            );
+            dependencies = (
+            );
+            name = FamilyMeet;
+            productName = FamilyMeet;
+            productReference = A20000000000000000000004 /* FamilyMeet.app */;
+            productType = "com.apple.product-type.application";
+        };
+        A50UT000000000000000001 /* FamilyMeetUITests */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = A70UT000000000000000001 /* Build configuration list for PBXNativeTarget "FamilyMeetUITests" */;
+            buildPhases = (
+                A30UT000000000000000001 /* Sources */,
+                A30UT000000000000000002 /* Frameworks */,
+                A30UT000000000000000003 /* Resources */,
+            );
+            buildRules = (
+            );
+            dependencies = (
+                A90UT000000000000000002 /* PBXTargetDependency */,
+            );
+            name = FamilyMeetUITests;
+            productName = FamilyMeetUITests;
+            productReference = A20UT000000000000000002 /* FamilyMeetUITests.xctest */;
+            productType = "com.apple.product-type.bundle.ui-testing";
+        };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+			A60000000000000000000001 /* Project object */ = {
+            isa = PBXProject;
+            attributes = {
+                BuildIndependentTargetsInParallel = 1;
+                LastSwiftUpdateCheck = 1500;
+                LastUpgradeCheck = 1500;
+                TargetAttributes = {
+                    A50000000000000000000001 = {
+                        CreatedOnToolsVersion = 15.0;
+                    };
+                    A50UT000000000000000001 = {
+                        CreatedOnToolsVersion = 15.0;
+                        TestTargetID = A50000000000000000000001;
+                    };
+                };
+            };
+            buildConfigurationList = A70000000000000000000002 /* Build configuration list for PBXProject "FamilyMeet" */;
+            compatibilityVersion = "Xcode 15.0";
+            developmentRegion = en;
+            hasScannedForEncodings = 0;
+            knownRegions = (
+                en,
+                Base,
+            );
+            mainGroup = A40000000000000000000001;
+            productRefGroup = A40000000000000000000003 /* Products */;
+            projectDirPath = "";
+            projectRoot = "";
+            targets = (
+                A50000000000000000000001 /* FamilyMeet */,
+                A50UT000000000000000001 /* FamilyMeetUITests */,
+            );
+        };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+			A30000000000000000000003 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (
+                A10000000000000000000003 /* Assets.xcassets in Resources */,
+                A10000000000000000000009 /* state.json in Resources */,
+                A1000000000000000000000A /* onboarding_partial.json in Resources */,
+                A1000000000000000000000B /* families_10.json in Resources */,
+            ); runOnlyForDeploymentPostprocessing = 0; };
+        A30UT000000000000000003 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = ( ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+			A30000000000000000000002 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+                A10000000000000000000001 /* FamilyMeetApp.swift in Sources */,
+                A10000000000000000000002 /* ContentView.swift in Sources */,
+                A10000000000000000000004 /* DesignSystem.swift in Sources */,
+                A10000000000000000000005 /* Inputs.swift in Sources */,
+                A10000000000000000000006 /* Chips.swift in Sources */,
+                A10000000000000000000007 /* Toast.swift in Sources */,
+                A10000000000000000000008 /* Keyboard.swift in Sources */,
+                A1000000000000000000000C /* AppStateLoader.swift in Sources */,
+            ); runOnlyForDeploymentPostprocessing = 0; };
+        A30UT000000000000000001 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+                A10UT000000000000000001 /* FamilyMeetUITests.swift in Sources */,
+            ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXFrameworksBuildPhase section */
+        A30UT000000000000000002 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = ( ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+        A90UT000000000000000001 /* PBXContainerItemProxy */ = {isa = PBXContainerItemProxy; containerPortal = A60000000000000000000001 /* Project object */; proxyType = 1; remoteGlobalIDString = A50000000000000000000001; remoteInfo = FamilyMeet; };
+        A90UT000000000000000002 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = A50000000000000000000001 /* FamilyMeet */; targetProxy = A90UT000000000000000001 /* PBXContainerItemProxy */; };
+/* End PBXTargetDependency section */
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A80000000000000000000001 /* Debug */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                ALWAYS_SEARCH_USER_PATHS = NO;
+                CLANG_ENABLE_MODULES = YES;
+                CURRENT_PROJECT_VERSION = 1;
+                GENERATE_INFOPLIST_FILE = YES;
+                INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is used to show nearby families (approximate only).";
+                INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used to add profile photos.";
+                INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photos are used for your profile gallery.";
+                IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+                PRODUCT_BUNDLE_IDENTIFIER = com.familymeet.app;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SDKROOT = iphoneos;
+                SWIFT_EMIT_LOC_STRINGS = YES;
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = 1;
+                ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                CODE_SIGN_STYLE = Automatic;
+                DEVELOPMENT_ASSET_PATHS = "\"FamilyMeet/Preview Content\"";
+                SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+                UILaunchScreen_Generation = YES;
+                UIUserInterfaceStyle = Automatic;
+            };
+            name = Debug;
+        };
+		A80000000000000000000002 /* Release */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                ALWAYS_SEARCH_USER_PATHS = NO;
+                CLANG_ENABLE_MODULES = YES;
+                CURRENT_PROJECT_VERSION = 1;
+                GENERATE_INFOPLIST_FILE = YES;
+                INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is used to show nearby families (approximate only).";
+                INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used to add profile photos.";
+                INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photos are used for your profile gallery.";
+                IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+                PRODUCT_BUNDLE_IDENTIFIER = com.familymeet.app;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SDKROOT = iphoneos;
+                SWIFT_EMIT_LOC_STRINGS = YES;
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = 1;
+                ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                CODE_SIGN_STYLE = Automatic;
+                DEVELOPMENT_ASSET_PATHS = "\"FamilyMeet/Preview Content\"";
+                SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+                UILaunchScreen_Generation = YES;
+                UIUserInterfaceStyle = Automatic;
+            };
+            name = Release;
+        };
+		A80000000000000000000003 /* Debug */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                SWIFT_VERSION = 5.0;
+            };
+            name = Debug;
+        };
+        A80000000000000000000004 /* Release */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                SWIFT_VERSION = 5.0;
+            };
+            name = Release;
+        };
+        A80UT000000000000000001 /* Debug */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                CODE_SIGN_STYLE = Automatic;
+                SDKROOT = iphonesimulator;
+                IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+                GENERATE_INFOPLIST_FILE = YES;
+                PRODUCT_BUNDLE_IDENTIFIER = com.familymeet.FamilyMeetUITests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = 1;
+                TEST_TARGET_NAME = FamilyMeet;
+            };
+            name = Debug;
+        };
+        A80UT000000000000000002 /* Release */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                CODE_SIGN_STYLE = Automatic;
+                SDKROOT = iphonesimulator;
+                IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+                GENERATE_INFOPLIST_FILE = YES;
+                PRODUCT_BUNDLE_IDENTIFIER = com.familymeet.FamilyMeetUITests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_VERSION = 5.0;
+                TARGETED_DEVICE_FAMILY = 1;
+                TEST_TARGET_NAME = FamilyMeet;
+            };
+            name = Release;
+        };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A70000000000000000000001 /* Build configuration list for PBXNativeTarget "FamilyMeet" */ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (
+                A80000000000000000000001 /* Debug */,
+                A80000000000000000000002 /* Release */,
+            );
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+        A70000000000000000000002 /* Build configuration list for PBXProject "FamilyMeet" */ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (
+                A80000000000000000000003 /* Debug */,
+                A80000000000000000000004 /* Release */,
+            );
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+        A70UT000000000000000001 /* Build configuration list for PBXNativeTarget "FamilyMeetUITests" */ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (
+                A80UT000000000000000001 /* Debug */,
+                A80UT000000000000000002 /* Release */,
+            );
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+/* End XCConfigurationList section */
+
+    };
+    rootObject = A60000000000000000000001 /* Project object */;
+}
