@@ -14,10 +14,11 @@
 		A10000000000000000000006 /* Chips.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000007 /* Chips.swift */; };
 		A10000000000000000000007 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000008 /* Toast.swift */; };
 		A10000000000000000000008 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000009 /* Keyboard.swift */; };
- 		A10000000000000000000009 /* state.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000A /* state.json */; };
- 		A1000000000000000000000A /* onboarding_partial.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000B /* onboarding_partial.json */; };
- 		A1000000000000000000000B /* families_10.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000C /* families_10.json */; };
- 		A1000000000000000000000C /* AppStateLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000D /* AppStateLoader.swift */; };
+	 		A10000000000000000000009 /* state.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000A /* state.json */; };
+	 		A1000000000000000000000A /* onboarding_partial.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000B /* onboarding_partial.json */; };
+	 		A1000000000000000000000B /* families_10.json in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000C /* families_10.json */; };
+	 		A1000000000000000000000C /* AppStateLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000D /* AppStateLoader.swift */; };
+        A10BAR00000000000000001 /* AppBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20BAR00000000000000001 /* AppBars.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,11 +30,12 @@
 		A20000000000000000000006 /* Inputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inputs.swift; sourceTree = "<group>"; };
 		A20000000000000000000007 /* Chips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chips.swift; sourceTree = "<group>"; };
 		A20000000000000000000008 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
-		A20000000000000000000009 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
- 		A2000000000000000000000A /* state.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = state.json; sourceTree = "<group>"; };
- 		A2000000000000000000000B /* onboarding_partial.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = onboarding_partial.json; sourceTree = "<group>"; };
- 		A2000000000000000000000C /* families_10.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = families_10.json; sourceTree = "<group>"; };
-			A2000000000000000000000D /* AppStateLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateLoader.swift; sourceTree = "<group>"; };
+			A20000000000000000000009 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+	 		A2000000000000000000000A /* state.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = state.json; sourceTree = "<group>"; };
+	 		A2000000000000000000000B /* onboarding_partial.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = onboarding_partial.json; sourceTree = "<group>"; };
+	 		A2000000000000000000000C /* families_10.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = families_10.json; sourceTree = "<group>"; };
+	 		A2000000000000000000000D /* AppStateLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateLoader.swift; sourceTree = "<group>"; };
+        A20BAR00000000000000001 /* AppBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBars.swift; sourceTree = "<group>"; };
         A20UT000000000000000001 /* FamilyMeetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMeetUITests.swift; sourceTree = "<group>"; };
         A20UT000000000000000002 /* FamilyMeetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = FamilyMeetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
                 A20000000000000000000007 /* Chips.swift */,
                 A20000000000000000000008 /* Toast.swift */,
                 A40000000000000000000005 /* Utilities */,
+                A20BAR00000000000000001 /* AppBars.swift */,
             );
             path = DesignSystem;
             sourceTree = "<group>";
@@ -208,6 +211,7 @@
                 A10000000000000000000007 /* Toast.swift in Sources */,
                 A10000000000000000000008 /* Keyboard.swift in Sources */,
                 A1000000000000000000000C /* AppStateLoader.swift in Sources */,
+                A10BAR00000000000000001 /* AppBars.swift in Sources */,
             ); runOnlyForDeploymentPostprocessing = 0; };
         A30UT000000000000000001 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
                 A10UT000000000000000001 /* FamilyMeetUITests.swift in Sources */,

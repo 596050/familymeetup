@@ -227,14 +227,15 @@ struct FMFullScreenCard<Content: View>: View {
 
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            Rectangle().fill(color.gradient).ignoresSafeArea()
+            Rectangle().fill(color.gradient)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             LinearGradient(colors: [Color.black.opacity(0.0), Color.black.opacity(0.45)],
                            startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             content
                 .padding(FMSpace.xl)
                 .foregroundStyle(.white)
         }
+        .clipped()
     }
 }
-

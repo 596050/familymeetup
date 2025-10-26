@@ -67,10 +67,10 @@ struct ContentView: View {
         .init(name: "Alex & Jamie", city: "Berkeley", kids: "2 and 5", color: .pink),
         .init(name: "Taylor & Sam", city: "Oakland", kids: "3", color: .orange),
         .init(name: "Riley", city: "San Francisco", kids: "1 and 4", color: .blue),
-        .init(name: "Morgan", city: "Alameda", kids: "2", color: .green)
+        .init(name: "Morgan", city: "Alameda", kids: "2", color: .green),
     ]
     #if DEBUG
-    @State private var didApplyAppState = false
+        @State private var didApplyAppState = false
     #endif
 
     var body: some View {
@@ -82,8 +82,7 @@ struct ContentView: View {
                 }
                 .id(profileJSON)
             } else {
-                VStack(spacing: 0) {
-                    topBar
+                ZStack(alignment: .top) {
                     GeometryReader { geo in
                         ZStack {
                             ForEach(Array(profiles.enumerated()), id: \.element.id) { _, profile in
@@ -91,8 +90,10 @@ struct ContentView: View {
                                     .allowsHitTesting(profile == profiles.last)
                             }
                         }
-                        .ignoresSafeArea(edges: .bottom)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
+                    .ignoresSafeArea() // ensure cards extend under status and home areas
+                    topBar
                 }
                 .sheet(isPresented: $showSettingsSheet) { settingsSheet }
                 .sheet(isPresented: $showFiltersSheet) { filtersSheet }
@@ -100,27 +101,28 @@ struct ContentView: View {
             }
         }
         #if DEBUG
-        .onAppear(perform: applyTestingStateIfAvailable)
+            .onAppear(perform: applyTestingStateIfAvailable)
         #endif
     }
 
     private var topBar: some View {
-        HStack {
-            Button { showFiltersSheet = true } label: {
+        FMTopBar {
+            Button {
+                showFiltersSheet = true
+            } label: {
                 Image(systemName: "line.3.horizontal.decrease.circle")
             }
             .buttonStyle(FMIconButtonStyle(variant: .tinted, size: .medium))
-            Spacer()
+        } title: {
             Text("FamilyMeet").font(.headline.weight(.semibold)).foregroundStyle(.secondary)
-            Spacer()
-            Button { showSettingsSheet = true } label: {
+        } trailing: {
+            Button {
+                showSettingsSheet = true
+            } label: {
                 Image(systemName: "gearshape")
             }
             .buttonStyle(FMIconButtonStyle(variant: .tinted, size: .medium))
         }
-        .padding(.horizontal)
-        .padding(.vertical, 4)
-        .background(.ultraThinMaterial)
     }
 
     // Removed footer (X/Heart buttons) to keep swipe-only interactions
@@ -151,6 +153,8 @@ struct ContentView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+            .frame(width: size.width, height: size.height)
+            .clipped()
         } onSwipe: { dir in
             handleSwipe(dir, profile: profile)
         }
@@ -171,18 +175,23 @@ struct ContentView_Previews: PreviewProvider {
 
 extension ContentView {
     #if DEBUG
-    private func applyTestingStateIfAvailable() {
-        guard !didApplyAppState, let state = AppStateLoader.loadState() else { return }
-        didApplyAppState = true
-        if let ob = state.onboarding {
-            let profile = UserProfile(names: ob.names, city: ob.city, kids: ob.kids, interests: ob.interests)
-            saveProfile(profile)
-            hasOnboarded = ob.hasOnboarded
+        private func applyTestingStateIfAvailable() {
+            guard !didApplyAppState, let state = AppStateLoader.loadState() else { return }
+            didApplyAppState = true
+            if let ob = state.onboarding {
+                let profile = UserProfile(
+                    names: ob.names, city: ob.city, kids: ob.kids, interests: ob.interests)
+                saveProfile(profile)
+                hasOnboarded = ob.hasOnboarded
+            }
+            if let p = state.profiles {
+                profiles = p.map {
+                    Profile(
+                        name: $0.name, city: $0.city, kids: $0.kids,
+                        color: AppStateLoader.color(from: $0.color))
+                }
+            }
         }
-        if let p = state.profiles {
-            profiles = p.map { Profile(name: $0.name, city: $0.city, kids: $0.kids, color: AppStateLoader.color(from: $0.color)) }
-        }
-    }
     #endif
     private var settingsSheet: some View {
         FMModalContainer(title: "Settings", onClose: { showSettingsSheet = false }) {
@@ -209,7 +218,10 @@ extension ContentView {
 
     private var profileSheet: some View {
         // Reuse the same onboarding flow to edit profile
-        OnboardingView(initial: loadProfile(), startAtStep: 1) { profile in
+        OnboardingView(
+            initial: loadProfile(), startAtStep: 1, showClose: true,
+            onClose: { showProfileSheet = false }
+        ) { profile in
             saveProfile(profile)
             hasOnboarded = true
             showProfileSheet = false
@@ -243,6 +255,8 @@ extension ContentView {
 struct OnboardingView: View {
     var initial: UserProfile?
     var startAtStep: Int
+    var showClose: Bool
+    var onClose: (() -> Void)?
     var onComplete: (UserProfile) -> Void
 
     @State private var step: Int = 0
@@ -252,7 +266,9 @@ struct OnboardingView: View {
     @State private var kids: String = ""
     @State private var interests: String = ""
     @State private var interestsSelection: Set<String> = []
-    private let interestOptions = ["Playdates", "Parks", "Hiking", "Museums", "Coffee", "Library", "Sports"]
+    private let interestOptions = [
+        "Playdates", "Parks", "Hiking", "Museums", "Coffee", "Library", "Sports",
+    ]
     @StateObject private var keyboard = KeyboardObserver()
     @State private var toast: FMToastItem? = nil
     @FocusState private var focusedField: OnboardingField?
@@ -260,9 +276,17 @@ struct OnboardingView: View {
 
     enum OnboardingField: Hashable { case names, city, kids, interests }
 
-    init(initial: UserProfile? = nil, startAtStep: Int = 0, onComplete: @escaping (UserProfile) -> Void) {
+    init(
+        initial: UserProfile? = nil,
+        startAtStep: Int = 0,
+        showClose: Bool = false,
+        onClose: (() -> Void)? = nil,
+        onComplete: @escaping (UserProfile) -> Void
+    ) {
         self.initial = initial
         self.startAtStep = startAtStep
+        self.showClose = showClose
+        self.onClose = onClose
         self.onComplete = onComplete
         _step = State(initialValue: startAtStep)
         if let initial {
@@ -280,16 +304,24 @@ struct OnboardingView: View {
                     .tag(0)
                 infoStep
                     .tag(1)
-                reviewStep
-                    .tag(2)
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .safeAreaInset(edge: .bottom) {
-            bottomBar
-                .padding(.horizontal)
-                .padding(.bottom, max(12, 12 + keyboard.bottomInset))
-                .background(.ultraThinMaterial)
+            FMBottomBar(keyboardAware: true) { bottomBar }
+        }
+        .safeAreaInset(edge: .top) {
+            if showClose {
+                FMTopBar {
+                    EmptyView()
+                } title: {
+                    EmptyView()
+                } trailing: {
+                    Button(action: { onClose?() }) { Image(systemName: "xmark") }
+                        .buttonStyle(FMIconButtonStyle(variant: .tinted, size: .medium))
+                }
+            }
         }
         .background(
             Color(.systemBackground)
@@ -352,6 +384,7 @@ struct OnboardingView: View {
             Spacer()
         }
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .onAppear {
             if ProcessInfo.processInfo.environment["FM_AUTO_ADVANCE"] == "1" {
                 confirmedAdult = true
@@ -361,53 +394,65 @@ struct OnboardingView: View {
     }
 
     private var infoStep: some View {
-        FMFocusableScrollContainer(focused: Binding(get: { focusedField }, set: { focusedField = $0 }), bottomExtra: 220) {
+        FMFocusableScrollContainer(
+            focused: Binding(get: { focusedField }, set: { focusedField = $0 }), bottomExtra: 220
+        ) {
             VStack(spacing: 16) {
                 Group {
-                    FMTextField("Parent names (optional)",
-                                text: $names,
-                                placeholder: "e.g., Alex & Jamie",
-                                systemImage: "person.2",
-                                id: "onboarding.names",
-                                submitLabel: .next,
-                                onSubmit: { focusedField = .city })
-                        .id(OnboardingField.names)
-                        .focused($focusedField, equals: .names)
+                    FMTextField(
+                        "Parent names (optional)",
+                        text: $names,
+                        placeholder: "e.g., Alex & Jamie",
+                        systemImage: "person.2",
+                        id: "onboarding.names",
+                        submitLabel: .next,
+                        onSubmit: { focusedField = .city }
+                    )
+                    .id(OnboardingField.names)
+                    .focused($focusedField, equals: .names)
 
-                    FMTextField("City or neighborhood",
-                                text: $city,
-                                placeholder: "e.g., Berkeley",
-                                systemImage: "mappin.and.ellipse",
-                                id: "onboarding.city",
-                                textContentType: .addressCity,
-                                autocapitalization: .words,
-                                submitLabel: .next,
-                                onSubmit: { focusedField = .kids })
-                        .id(OnboardingField.city)
-                        .focused($focusedField, equals: .city)
+                    FMTextField(
+                        "City or neighborhood",
+                        text: $city,
+                        placeholder: "e.g., Berkeley",
+                        systemImage: "mappin.and.ellipse",
+                        id: "onboarding.city",
+                        textContentType: .addressCity,
+                        autocapitalization: .words,
+                        submitLabel: .next,
+                        onSubmit: { focusedField = .kids }
+                    )
+                    .id(OnboardingField.city)
+                    .focused($focusedField, equals: .city)
 
-                    FMTextField("Kids ages",
-                                text: $kids,
-                                placeholder: "e.g., 2 and 5",
-                                systemImage: "figure.2.and.child.holdinghands",
-                                id: "onboarding.kids",
-                                submitLabel: .next,
-                                onSubmit: { focusedField = .interests })
-                        .id(OnboardingField.kids)
-                        .focused($focusedField, equals: .kids)
+                    FMTextField(
+                        "Kids ages",
+                        text: $kids,
+                        placeholder: "e.g., 2 and 5",
+                        systemImage: "figure.2.and.child.holdinghands",
+                        id: "onboarding.kids",
+                        submitLabel: .next,
+                        onSubmit: { focusedField = .interests }
+                    )
+                    .id(OnboardingField.kids)
+                    .focused($focusedField, equals: .kids)
                 }
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Interests").font(.headline)
-                    FMChipGroup(options: interestOptions, selection: $interestsSelection, allowsMultipleSelection: true)
-                    FMTextField("Other interests",
-                                text: $interests,
-                                placeholder: "comma separated",
-                                systemImage: "tag",
-                                id: "onboarding.interestsText",
-                                submitLabel: .done,
-                                onSubmit: { focusedField = nil })
-                        .id(OnboardingField.interests)
-                        .focused($focusedField, equals: .interests)
+                    FMChipGroup(
+                        options: interestOptions, selection: $interestsSelection,
+                        allowsMultipleSelection: true)
+                    FMTextField(
+                        "Other interests",
+                        text: $interests,
+                        placeholder: "comma separated",
+                        systemImage: "tag",
+                        id: "onboarding.interestsText",
+                        submitLabel: .done,
+                        onSubmit: { focusedField = nil }
+                    )
+                    .id(OnboardingField.interests)
+                    .focused($focusedField, equals: .interests)
                 }
                 Text("You can edit this later from Settings.")
                     .font(.footnote)
@@ -416,6 +461,7 @@ struct OnboardingView: View {
             }
             .padding()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .onAppear {
             // Ensure fields prefill from either passed initial or saved defaults
             if let i = initial {
@@ -439,10 +485,26 @@ struct OnboardingView: View {
             VStack(spacing: 16) {
                 Text("Review").font(.title2.bold())
                 VStack(alignment: .leading, spacing: 10) {
-                    HStack { Text("Names"); Spacer(); Text(names.isEmpty ? "—" : names).foregroundStyle(.secondary) }
-                    HStack { Text("City"); Spacer(); Text(city.isEmpty ? "—" : city).foregroundStyle(.secondary) }
-                    HStack { Text("Kids"); Spacer(); Text(kids.isEmpty ? "—" : kids).foregroundStyle(.secondary) }
-                    HStack { Text("Interests"); Spacer(); Text(interests.isEmpty ? "—" : interests).foregroundStyle(.secondary) }
+                    HStack {
+                        Text("Names")
+                        Spacer()
+                        Text(names.isEmpty ? "—" : names).foregroundStyle(.secondary)
+                    }
+                    HStack {
+                        Text("City")
+                        Spacer()
+                        Text(city.isEmpty ? "—" : city).foregroundStyle(.secondary)
+                    }
+                    HStack {
+                        Text("Kids")
+                        Spacer()
+                        Text(kids.isEmpty ? "—" : kids).foregroundStyle(.secondary)
+                    }
+                    HStack {
+                        Text("Interests")
+                        Spacer()
+                        Text(interests.isEmpty ? "—" : interests).foregroundStyle(.secondary)
+                    }
                 }
                 .padding()
                 .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 16))
@@ -450,6 +512,7 @@ struct OnboardingView: View {
             .padding()
             .padding(.bottom, 200)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .scrollDismissesKeyboard(.interactively)
     }
 
@@ -468,7 +531,8 @@ struct OnboardingView: View {
                     }
                     // Validate city on info step
                     if step == 1 && city.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        toast = FMToastItem(message: "Please enter your city or neighborhood.", style: .warning)
+                        toast = FMToastItem(
+                            message: "Please enter your city or neighborhood.", style: .warning)
                         return
                     }
                     step += 1
@@ -484,10 +548,11 @@ struct OnboardingView: View {
                         let parts = (chips + (free.isEmpty ? [] : [free]))
                         return parts.joined(separator: ", ")
                     }()
-                    let profile = UserProfile(names: names.trimmingCharacters(in: .whitespacesAndNewlines),
-                                              city: city.trimmingCharacters(in: .whitespacesAndNewlines),
-                                              kids: kids.trimmingCharacters(in: .whitespacesAndNewlines),
-                                              interests: combinedInterests)
+                    let profile = UserProfile(
+                        names: names.trimmingCharacters(in: .whitespacesAndNewlines),
+                        city: city.trimmingCharacters(in: .whitespacesAndNewlines),
+                        kids: kids.trimmingCharacters(in: .whitespacesAndNewlines),
+                        interests: combinedInterests)
                     onComplete(profile)
                 }
                 .fmButton(.success)
@@ -512,8 +577,9 @@ struct OnboardingView: View {
 
     private func loadSavedProfile() -> UserProfile? {
         if let json = UserDefaults.standard.string(forKey: "fm_profile"),
-           let data = json.data(using: .utf8),
-           let profile = try? JSONDecoder().decode(UserProfile.self, from: data) {
+            let data = json.data(using: .utf8),
+            let profile = try? JSONDecoder().decode(UserProfile.self, from: data)
+        {
             return profile
         }
         return nil
@@ -521,7 +587,8 @@ struct OnboardingView: View {
 
     private func applyFromStoredProfile() {
         guard !fmProfileJSON.isEmpty, let data = fmProfileJSON.data(using: .utf8),
-              let p = try? JSONDecoder().decode(UserProfile.self, from: data) else { return }
+            let p = try? JSONDecoder().decode(UserProfile.self, from: data)
+        else { return }
         names = p.names
         city = p.city
         kids = p.kids
