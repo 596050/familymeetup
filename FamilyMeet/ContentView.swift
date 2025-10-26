@@ -308,6 +308,7 @@ struct OnboardingView: View {
             .tabViewStyle(.page(indexDisplayMode: .always))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .ignoresSafeArea()
         .safeAreaInset(edge: .bottom) {
             FMBottomBar(keyboardAware: true) { bottomBar }
         }
